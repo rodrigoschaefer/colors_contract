@@ -1,0 +1,25 @@
+{
+  "name": "colors_contract",
+  "version": "1.0.0",
+  "description": "An ERC-271 smart contract to manage color tokens",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rodrigoschaefer/colors_contract.git"
+  },
+  "author": "rodrigo schaefer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rodrigoschaefer/colors_contract/issues"
+  },
+  "homepage": "https://github.com/rodrigoschaefer/colors_contract#readme",
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.4.0"
+  }
+}
