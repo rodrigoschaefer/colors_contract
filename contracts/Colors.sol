@@ -13,7 +13,7 @@ contract Colors is ERC721Enumerable {
     event TokenMinted(string _rgb, uint id);
 
     uint256 currentId = 0;
-    mapping(string => uint256) public _colors;
+    mapping(string => uint256) public colors;
 
     constructor() ERC721("Colors", "CLR") {}
 
@@ -28,8 +28,8 @@ contract Colors is ERC721Enumerable {
     function mint(string memory _rgb) public {
         currentId++;
         // Colors should not have been used yet
-        require(_colors[_rgb] == 0, 'A token for this color is already minted');
-        _colors[_rgb] = currentId;
+        require(colors[_rgb] == 0, 'A token for this color is already minted');
+        colors[_rgb] = currentId;
         _mint(msg.sender, currentId);
         emit TokenMinted(_rgb,currentId);
     }

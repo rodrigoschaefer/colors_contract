@@ -11,7 +11,7 @@ contract TestColors {
     // Truffle will send the TestContract one Ether after deploying the contract.
     uint public initialBalance = 1 ether;
 
-    Colors colors = Colors(DeployedAddresses.Colors());
+    Colors colorsContract = Colors(DeployedAddresses.Colors());
 
     address payable expectedOwner = payable(address(this));
     
@@ -24,14 +24,16 @@ contract TestColors {
     function beforeAll () public {}
 
     function testMint() public {
-        colors.mint('112233');
-        uint supply = colors.totalSupply();
+        colorsContract.mint('112233');
+        uint supply = colorsContract.totalSupply();
         Assert.equal(supply, 1, "Total supply should be 1");
+        uint colorId = colorsContract.colors('112233');
+        Assert.equal(colorId, 1, "Color id should be 1");
     }
 
     function testMintFail() public {
         string memory errorMsg;
-        try  colors.mint('112233') {
+        try  colorsContract.mint('112233') {
         } catch Error(string memory reason) {
             errorMsg = reason;
         }
