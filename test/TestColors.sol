@@ -27,8 +27,8 @@ contract TestColors {
         colorsContract.mint('112233');
         uint supply = colorsContract.totalSupply();
         Assert.equal(supply, 1, "Total supply should be 1");
-        uint colorId = colorsContract.colors('112233');
-        Assert.equal(colorId, 1, "Color id should be 1");
+        string memory colorId = colorsContract.colors(0);
+        Assert.equal(colorId, '112233', "Color id should be '112233'");
     }
 
     function testMintFail() public {
