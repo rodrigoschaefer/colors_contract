@@ -27,11 +27,11 @@ contract TestColors {
         colorsContract.mint('112233');
         uint supply = colorsContract.totalSupply();
         Assert.equal(supply, 1, "Total supply should be 1");
-        string memory colorId = colorsContract.colors(0);
+        string memory colorId = colorsContract.mintedColors(0);
         Assert.equal(colorId, '112233', "Color id should be '112233'");
     }
 
-    function testMintFail() public {
+    function testMintFailDuplicateColor() public {
         string memory errorMsg;
         try  colorsContract.mint('112233') {
         } catch Error(string memory reason) {
@@ -39,6 +39,14 @@ contract TestColors {
         }
         Assert.equal(errorMsg,'A token for this color is already minted', 'A token for a color should not be minted more than once');
     }
-
+    
+    function testMintFailWrongRgbFormat() public {
+        string memory errorMsg;
+        try  colorsContract.mint('11223P') {
+        } catch Error(string memory reason) {
+            errorMsg = reason;
+        }
+        Assert.equal(errorMsg,'Wrong color format', 'Color format should be 6 hex chars');
+    }    
 }
 
