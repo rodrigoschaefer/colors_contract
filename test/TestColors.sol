@@ -8,11 +8,13 @@ import "../contracts/Colors.sol";
 
 contract TestColors {
 
+    event TokenObetained(uint id);
+
     // Truffle will send the TestContract one Ether after deploying the contract.
     uint public initialBalance = 1 ether;
 
     Colors colorsContract = Colors(DeployedAddresses.Colors());
-
+    
     address payable expectedOwner = payable(address(this));
     
     // Function to receive Ether. msg.data must be empty
@@ -47,6 +49,18 @@ contract TestColors {
             errorMsg = reason;
         }
         Assert.equal(errorMsg,'Wrong color format', 'Color format should be 6 hex chars');
-    }    
+    } 
+
+     function testGetTokenByOwner() public {
+        colorsContract.mint('445566');
+        colorsContract.mint('778899');
+        colorsContract.mint('001122');
+        uint balance = colorsContract.balanceOf(expectedOwner);
+        Assert.equal(balance, 4, "Owned token count should be 4");
+        for(uint i=0;i<balance;i++){
+            uint tokenId = colorsContract.tokenOfOwnerByIndex(expectedOwner,i);
+            emit TokenObetained(tokenId);
+        }
+    }   
 }
 

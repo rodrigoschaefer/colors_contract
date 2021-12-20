@@ -26,7 +26,7 @@ contract Colors is ERC721Enumerable {
     }
 
     /**
-        Creates a new Color token
+        Creates a new Color token.
     */
     function mint(string memory _rgb) public {
         require(validateRgb(_rgb) == true, 'Wrong color format');
@@ -56,6 +56,4 @@ contract Colors is ERC721Enumerable {
         return true;
     }
 
-   
-   
 }
