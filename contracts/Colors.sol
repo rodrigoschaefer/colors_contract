@@ -2,13 +2,18 @@
 
 pragma solidity >=0.8.0 <0.9.0;
 
-//import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 /**
  * @title SmartWill
  * @dev Time based resource transfers
  */
 contract Colors is ERC721Enumerable {
+
+    struct ColorToken{
+        uint id;
+        address owner;
+        string rgb;
+    }
 
     event TokenMinted(string _rgb, uint id);
     
@@ -54,6 +59,17 @@ contract Colors is ERC721Enumerable {
             return false;
         }
         return true;
+    }
+
+    function getColorTokenByIndex(uint index) public view returns (ColorToken memory){
+       uint tokenId =  tokenByIndex(index);
+       address owner = ownerOf(tokenId);
+       string memory rgb = mintedColors[index];
+       return ColorToken({
+        id: tokenId,
+        owner: owner,
+        rgb: rgb
+       }); 
     }
 
 }

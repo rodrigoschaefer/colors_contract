@@ -25,4 +25,11 @@ contract('Colors', (accounts) => {
     }
   });
 
+  it("should get token by id", async ()=> {
+    const instance = await colorsContract.deployed();
+    var token = await instance.getColorTokenByIndex(1);
+    assert.equal(token.owner, accounts[0], "Owner should be accounts[0]");
+    assert.equal(token.rgb, '445566', "rgb should be 445566");
+  });
+
 });
